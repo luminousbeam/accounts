@@ -2,7 +2,8 @@ class RecordsController < ApplicationController
   def index
     @records = Record.all
   end
-
+  
+  skip_before_action :verify_authenticity_token
   def create
     @record = Record.new(record_params)
 
