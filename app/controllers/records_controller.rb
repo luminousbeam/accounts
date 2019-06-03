@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   def index
     @records = Record.all
   end
-  
+
   skip_before_action :verify_authenticity_token
   def create
     @record = Record.new(record_params)
@@ -12,6 +12,12 @@ class RecordsController < ApplicationController
     else
       render json: @record.errors, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @record = Record.find(params[:id])
+    @record.destroy
+    head :no_content
   end
 
   private
